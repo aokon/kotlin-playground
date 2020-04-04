@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Button</string>
+    <string name="greeting_message">Hello my friend</string>
+    <string name="message_onclicked">You clicked the button %s %s</string>
+    <plurals name="times">
+        <item quantity="one">time</item>
+        <item quantity="other">times</item>
+    </plurals>
+</resources>
