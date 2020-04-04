@@ -2,6 +2,8 @@
     <string name="app_name">Button</string>
     <string name="greeting_message">Hello my friend</string>
     <string name="message_onclicked">You clicked the button %s %s</string>
+    <string name="btn_clicker_label">Clicker</string>
+    <string name="btn_reset_label">Reset</string>
     <plurals name="times">
         <item quantity="one">time</item>
         <item quantity="other">times</item>

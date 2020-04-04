@@ -3,18 +3,17 @@ package com.elegantcode.button
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.elegantcode.button.R.id
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity(counter: Int = 0) : AppCompatActivity() {
-    private var counter = counter
+class MainActivity(private var counter: Int = 0) : AppCompatActivity() {
     private fun timeSuffix(): String = resources.getQuantityString(R.plurals.times, counter)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val helloTextView: TextView = findViewById(R.id.text_view_id);
-        helloTextView.text = getString(R.string.greeting_message)
+        val helloTextView = findViewById<TextView>(id.text_view_id)
 
         btn_clicker.setOnClickListener {
             counter += 1
