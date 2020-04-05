@@ -2,7 +2,9 @@ package com.elegantcode.button
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import com.elegantcode.button.R.id
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,14 +19,16 @@ class MainActivity(private var counter: Int = 0) : AppCompatActivity() {
 
         btn_clicker.setOnClickListener {
             counter += 1
-            helloTextView.text = getString(
-                R.string.message_onclicked,
-                counter.toString(),
-                timeSuffix()
-            )
+            Log.d("Clicker", "Current value $counter")
+            helloTextView.text = counter.toString()
         }
 
         btn_reset.setOnClickListener {
+            Toast.makeText(getApplicationContext(), getString(
+                R.string.message_onclicked,
+                counter.toString(),
+                timeSuffix()
+            ), Toast.LENGTH_LONG).show()
             counter = 0
             helloTextView.text = getString(R.string.greeting_message)
         }
