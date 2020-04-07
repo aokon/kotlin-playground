@@ -15,12 +15,13 @@ class MainActivity(private var counter: Int = 0) : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val helloTextView = findViewById<TextView>(id.text_view_id)
+        // val helloTextView = findViewById<TextView>(id.text_view_id)
 
         btn_clicker.setOnClickListener {
             counter += 1
             Log.d("Clicker", "Current value $counter")
-            helloTextView.text = counter.toString()
+            // helloTextView.text = counter.toString()
+            text_view_id.text = counter.toString()
         }
 
         btn_reset.setOnClickListener {
@@ -30,7 +31,7 @@ class MainActivity(private var counter: Int = 0) : AppCompatActivity() {
                 timeSuffix()
             ), Toast.LENGTH_LONG).show()
             counter = 0
-            helloTextView.text = getString(R.string.greeting_message)
+            text_view_id.text = getString(R.string.greeting_message)
         }
     }
 }
