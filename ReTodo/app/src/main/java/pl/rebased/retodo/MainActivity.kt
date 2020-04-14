@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.room.RoomDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_todo.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pl.rebased.retodo.data.TodoDatabase
 import pl.rebased.retodo.data.Todo
 import pl.rebased.retodo.data.TodoList
@@ -27,8 +30,12 @@ interface ChangeTodoHandler {
 }
 
 class TodoViewModel(application: Application): AndroidViewModel(application) {
+    val bg = CoroutineScope(Dispatchers.IO)
+
     val todos : LiveData<TodoList> by lazy {
-        MutableLiveData(dao.getAll())
+        // MutableLiveData(dao.getIncomplete())
+
+        dao.getLiveIncomplete()
     }
 
     private val db by lazy {
@@ -39,10 +46,12 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
 
     fun setDone(todo: Todo, done: Boolean) {
         todo.completed = done
+        bg.launch { dao.update(todo) }
     }
 
     fun setDescription(todo: Todo, text: String) {
         todo.name = text
+        bg.launch { dao.update(todo) }
     }
 
 }

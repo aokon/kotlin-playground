@@ -19,8 +19,9 @@ abstract class TodoDatabase: RoomDatabase() {
         }
         private fun buildDatabase(context: Context): TodoDatabase {
             return Room.databaseBuilder(context, TodoDatabase::class.java, "TodoApp")
-                .fallbackToDestructiveMigration().allowMainThreadQueries()
-                .createFromAsset("retodo.sqlite")
+                .fallbackToDestructiveMigration()
+                // .allowMainThreadQueries() - sorry bro, keep simple the main thread
+                // .createFromAsset("retodo.sqlite")
                 .build()
         }
     }

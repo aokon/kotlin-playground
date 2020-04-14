@@ -1,5 +1,6 @@
 package pl.rebased.retodo.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 typealias TodoList = List<Todo>
@@ -25,6 +26,9 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo WHERE NOT completed")
     fun getIncomplete(): TodoList
+
+    @Query("SELECT * FROM todo WHERE NOT completed")
+    fun getLiveIncomplete(): LiveData<TodoList>
 
     @Query("SELECT * FROM todo")
     fun getAll(): TodoList
