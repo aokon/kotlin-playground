@@ -1,5 +1,6 @@
 package pl.rebased.retodo
 
+import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,40 +13,38 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.RoomDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_todo.view.*
+import pl.rebased.retodo.data.TodoDatabase
+import pl.rebased.retodo.data.Todo
+import pl.rebased.retodo.data.TodoList
+
 
 interface ChangeTodoHandler {
   fun onDoneChange(item: Todo, done: Boolean)
   fun onDescriptionChange(item: Todo, text: String)
 }
 
-data class Todo(var name: String, var isCompleted: Boolean)
-
-typealias TodoList =  List<Todo>
-
-class TodoViewModel : ViewModel() {
+class TodoViewModel(application: Application): AndroidViewModel(application) {
     val todos : LiveData<TodoList> by lazy {
-        MutableLiveData(todoList())
+        MutableLiveData(dao.getAll())
     }
 
+    private val db by lazy {
+        TodoDatabase.getInstance(application)
+    }
+
+    private val dao by lazy { db.dao() }
+
     fun setDone(todo: Todo, done: Boolean) {
-        todo.isCompleted = done
+        todo.completed = done
     }
 
     fun setDescription(todo: Todo, text: String) {
         todo.name = text
     }
 
-    private fun todoList(): List<Todo> {
-        return listOf(
-            Todo("Todo 1", true),
-            Todo("Todo 2", true),
-            Todo("Todo 3", false),
-            Todo("Todo 4", false),
-            Todo("Todo 5", false)
-        )
-    }
 }
 
 class TodoAdapter(private val handler: ChangeTodoHandler) : ListAdapter<Todo, TodoViewHolder>(diff) {
@@ -79,13 +78,13 @@ class TodoViewHolder(itemView: View, val handler: ChangeTodoHandler) : RecyclerV
                     else -> false
                 }
         }
-        itemView.checkBox.isChecked = item.isCompleted
+        itemView.checkBox.isChecked = item.completed
         itemView.textView.setText(item.name)
     }
 }
 
 class MainActivity : AppCompatActivity(), ChangeTodoHandler {
-    // we want to avoid moving  model to GC when
+    // we want to avoid moving model to GC
     val model by lazy {
         ViewModelProvider(this).get(TodoViewModel::class.java)
     }
