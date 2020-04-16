@@ -30,7 +30,7 @@ interface ChangeTodoHandler {
 }
 
 class TodoViewModel(application: Application): AndroidViewModel(application) {
-    val bg = CoroutineScope(Dispatchers.IO)
+    val task = CoroutineScope(Dispatchers.IO)
 
     val todos : LiveData<TodoList> by lazy {
         // MutableLiveData(dao.getIncomplete())
@@ -46,12 +46,17 @@ class TodoViewModel(application: Application): AndroidViewModel(application) {
 
     fun setDone(todo: Todo, done: Boolean) {
         todo.completed = done
-        bg.launch { dao.update(todo) }
+        task.launch { dao.update(todo) }
     }
 
     fun setDescription(todo: Todo, text: String) {
         todo.name = text
-        bg.launch { dao.update(todo) }
+        task.launch { dao.update(todo) }
+    }
+
+    fun addTodo() {
+        val newTodo = Todo(id = 0, name = "New todo", completed = false)
+        task.launch { dao.insert(newTodo) }
     }
 
 }
@@ -75,10 +80,10 @@ class TodoAdapter(private val handler: ChangeTodoHandler) : ListAdapter<Todo, To
 
 class TodoViewHolder(itemView: View, val handler: ChangeTodoHandler) : RecyclerView.ViewHolder(itemView) {
     fun bindTo(item: Todo) {
-        itemView.checkBox.setOnCheckedChangeListener { view, isChecked ->
+        itemView.checkBox.setOnCheckedChangeListener { _, isChecked ->
             handler.onDoneChange(item, isChecked)
         }
-        itemView.textView.setOnEditorActionListener { v, actionId, event ->
+        itemView.textView.setOnEditorActionListener { v, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT, EditorInfo.IME_NULL -> {
                         handler.onDescriptionChange(item, v.text.toString())
@@ -109,6 +114,10 @@ class MainActivity : AppCompatActivity(), ChangeTodoHandler {
         model.todos.observe(this, Observer {
            todoAdapter.submitList(it)
         })
+
+        addTodoButton?.setOnClickListener {
+            model.addTodo()
+        }
     }
 
     override fun onDoneChange(item: Todo, done: Boolean) {

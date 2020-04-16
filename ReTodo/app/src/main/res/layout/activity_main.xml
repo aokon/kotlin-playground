@@ -10,7 +10,20 @@
         android:id="@+id/todoList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
         tools:listitem="@layout/item_todo" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTodoButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        app:fabCustomSize="64dp"
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        tools:layout_editor_absoluteY="731dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
