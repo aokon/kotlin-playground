@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.CompoundButton
+import android.widget.TextView
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +24,8 @@ import kotlinx.coroutines.launch
 import pl.rebased.retodo.data.TodoDatabase
 import pl.rebased.retodo.data.Todo
 import pl.rebased.retodo.data.TodoList
+import pl.rebased.retodo.databinding.ActivityMainBinding
+import pl.rebased.retodo.databinding.ItemTodoBinding
 
 
 interface ChangeTodoHandler {
@@ -80,44 +84,73 @@ class TodoAdapter(private val handler: ChangeTodoHandler) : ListAdapter<Todo, To
 
 class TodoViewHolder(itemView: View, val handler: ChangeTodoHandler) : RecyclerView.ViewHolder(itemView) {
     fun bindTo(item: Todo) {
-        itemView.checkBox.setOnCheckedChangeListener { _, isChecked ->
+        val binding = ItemTodoBinding.bind(itemView)
+        binding.todo = item
+
+        binding.onCheckedHandler = CompoundButton.OnCheckedChangeListener { _, isChecked ->
             handler.onDoneChange(item, isChecked)
         }
-        itemView.textView.setOnEditorActionListener { v, actionId, _ ->
-                when (actionId) {
-                    EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT, EditorInfo.IME_NULL -> {
-                        handler.onDescriptionChange(item, v.text.toString())
-                        true
-                    }
-                    else -> false
+
+        binding.onEditTextHandler = TextView.OnEditorActionListener { v, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT, EditorInfo.IME_NULL -> {
+                    handler.onDescriptionChange(item, v.text.toString())
+                    true
                 }
+                else -> false
+            }
         }
-        itemView.checkBox.isChecked = item.completed
-        itemView.textView.setText(item.name)
+
+        /*
+            itemView.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                handler.onDoneChange(item, isChecked)
+            }
+            itemView.textView.setOnEditorActionListener { v, actionId, _ ->
+                    when (actionId) {
+                        EditorInfo.IME_ACTION_DONE, EditorInfo.IME_ACTION_NEXT, EditorInfo.IME_NULL -> {
+                            handler.onDescriptionChange(item, v.text.toString())
+                            true
+                        }
+                        else -> false
+                    }
+            }
+            itemView.checkBox.isChecked = item.completed
+            itemView.textView.setText(item.name)
+         */
     }
 }
 
 class MainActivity : AppCompatActivity(), ChangeTodoHandler {
-    // we want to avoid moving model to GC
+    // we want to avoid moving model to GC, so it's lazy
     val model by lazy {
         ViewModelProvider(this).get(TodoViewModel::class.java)
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        // run custom code after the super
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // setContentView(R.layout.activity_main)
         val todoAdapter = TodoAdapter(this)
 
-        todoList.adapter = todoAdapter
-        todoList.layoutManager = LinearLayoutManager(this as Context, LinearLayoutManager.VERTICAL, false)
+        binding.adapter = todoAdapter
+        binding.layoutManager = LinearLayoutManager(this as Context, LinearLayoutManager.VERTICAL, false)
+        binding.onAddNewTodo = View.OnClickListener {
+           model.addTodo()
+        }
+
+        // todoList.adapter = todoAdapter
+        // todoList.layoutManager = LinearLayoutManager(this as Context, LinearLayoutManager.VERTICAL, false)
 
         model.todos.observe(this, Observer {
            todoAdapter.submitList(it)
         })
 
-        addTodoButton?.setOnClickListener {
-            model.addTodo()
-        }
+        // addTodoButton?.setOnClickListener {
+        //    model.addTodo()
+        // }
     }
 
     override fun onDoneChange(item: Todo, done: Boolean) {

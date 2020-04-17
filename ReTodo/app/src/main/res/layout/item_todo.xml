@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="64dp"
-    android:paddingVertical="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text=" "
-        android:textSize="18sp" />
+    <data>
+        <variable
+            name="todo"
+            type="pl.rebased.retodo.data.Todo" />
+        <variable
+            name="onCheckedHandler"
+            type="android.widget.CompoundButton.OnCheckedChangeListener" />
 
-    <EditText
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="18sp"
-        android:inputType="text"
-        tools:text="@tools:sample/cities" />
-</LinearLayout>
+        <variable
+            name="onEditTextHandler"
+            type="android.widget.TextView.OnEditorActionListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:paddingVertical="10dp">
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:onCheckedChanged="@{onCheckedHandler}"
+            android:text=" "
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:inputType="text"
+            android:text="@{todo.name}"
+            android:onEditorActionListener="@{onEditTextHandler}"
+            tools:text="@tools:sample/cities" />
+    </LinearLayout>
+</layout>
