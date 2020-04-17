@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">AboutMe</string>
-    <string name="name">John Doe</string>
+    <string name="name">Richard Phillips Feynman</string>
+    <string name="yellow_star">Yellow star</string>
+    <string name="bio">Richard Phillips Feynman, ForMemRS was an American theoretical physicist,
+        \nknown for his work in the path integral formulation of quantum mechanics,
+        \nthe theory of quantum electrodynamics, and the physics of the superfluidity of supercooled liquid helium, as well as in particle physics for which he proposed the parton model.
+        \n\nFeynman developed a widely used pictorial representation scheme for the mathematical expressions describing the behavior of
+        \nsubatomic particles, which later became known as Feynman diagrams.\n\n During his lifetime,
+        \n<b>Feynman</b> became one of the best-known scientists in the world.
+        \n\n In a 1999 poll of 130 leading physicists worldwide by the British journal Physics World, he was ranked as one of the ten greatest physicists of all time.\n\n</string>
 </resources>
