@@ -8,25 +8,24 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setListeners()
     }
 
-    private fun setListeners() {
-        val boxesList: List<View> = listOf(
+    private val model by lazy {
+        listOf(
             box_one_text,
             box_two_text,
             box_three_text,
             box_four_text,
             box_five_text
         )
+    }
 
-        for (box in boxesList) {
-            box.setOnClickListener { handleOnClick(it) }
-        }
+    private fun setListeners() {
+        model.forEach { it.setOnClickListener(::handleOnClick) }
     }
 
     private fun handleOnClick(view: View) = when (view.id) {
