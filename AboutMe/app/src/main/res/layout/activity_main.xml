@@ -10,7 +10,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/name_text"
+        android:id="@+id/nameText"
         style="@style/NameStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,17 +18,17 @@
         android:textAlignment="center" />
 
     <EditText
-        android:id="@+id/name_edit"
+        android:id="@+id/nicknameEdit"
         style="@style/NameStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/name_edit_hint"
+        android:hint="@string/nicknameEditHint"
         android:inputType="textPersonName"
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/done_button"
+        android:id="@+id/doneBtn"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
         android:text="@string/done" />
 
     <TextView
-        android:id="@+id/nickname_text"
+        android:id="@+id/nicknameText"
         style="@style/NameStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         android:visibility="gone" />
 
     <ImageView
-        android:id="@+id/star_image"
+        android:id="@+id/starImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin"
@@ -54,30 +54,18 @@
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <ScrollView
-        android:id="@+id/bio_scroll"
+        android:id="@+id/bioScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/bioText"
+            style="@style/NameStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/map_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/world_map"
-                app:srcCompat="@android:drawable/ic_menu_mapmode" />
-
-            <TextView
-                android:id="@+id/bio_text"
-                style="@style/NameStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingMultiplier="1.2"
-                android:text="@string/bio" />
-        </LinearLayout>
+            android:lineSpacingMultiplier="1.2"
+            android:drawableTop="@android:drawable/ic_menu_mapmode"
+            android:text="@string/bio" />
     </ScrollView>
 
 

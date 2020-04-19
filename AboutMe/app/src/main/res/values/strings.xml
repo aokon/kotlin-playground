@@ -10,6 +10,6 @@
         \nsubatomic particles, which later became known as Feynman diagrams.\n\n During his lifetime,
         \n<b>Feynman</b> became one of the best-known scientists in the world.
         \n\n In a 1999 poll of 130 leading physicists worldwide by the British journal Physics World, he was ranked as one of the ten greatest physicists of all time.\n\n</string>
-    <string name="name_edit_hint">What is your Name?</string>
+    <string name="nicknameEditHint">What is your Name?</string>
     <string name="done">Done</string>
 </resources>
