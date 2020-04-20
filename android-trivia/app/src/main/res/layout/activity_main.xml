@@ -14,8 +14,7 @@
   ~ limitations under the License.
   -->
 
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
@@ -24,11 +23,13 @@
             android:orientation="vertical">
 
                 <fragment
-                    android:id="@+id/fragmentTitle"
-                    android:name="com.example.android.navigation.TitleFragment"
+                    android:id="@+id/navHostFragment"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_title" />
+                    app:defaultNavHost="true"
+                    app:navGraph="@navigation/nav_graph" />
+
         </LinearLayout>
 
 </layout>
