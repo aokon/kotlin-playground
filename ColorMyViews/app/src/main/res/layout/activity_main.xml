@@ -103,4 +103,41 @@
         app:layout_constraintTop_toBottomOf="@+id/boxTwoText"
         app:layout_constraintVertical_bias="0.017" />
 
+    <Button
+        android:id="@+id/redButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/red"
+        android:textColor="@android:color/secondary_text_light"
+        app:layout_constraintBaseline_toBaselineOf="@+id/yellowButton"
+        app:layout_constraintEnd_toStartOf="@+id/yellowButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/yellowButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/greenButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/redButton"
+        app:layout_constraintTop_toBottomOf="@+id/howToPlayDescText"
+        app:layout_constraintVertical_bias="0.95" />
+
+    <Button
+        android:id="@+id/greenButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/green"
+        app:layout_constraintBaseline_toBaselineOf="@+id/yellowButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/yellowButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
