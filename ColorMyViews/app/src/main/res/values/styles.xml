@@ -9,7 +9,7 @@
     </style>
 
     <style name="Box">
-        <item name="android:background">#8BC34A</item>
+        <item name="android:background">#FFFFFF</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textFontWeight">@android:integer/config_mediumAnimTime</item>

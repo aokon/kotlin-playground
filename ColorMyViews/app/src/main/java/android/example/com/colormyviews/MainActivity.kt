@@ -1,6 +1,5 @@
 package android.example.com.colormyviews
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,11 +15,11 @@ class MainActivity : AppCompatActivity() {
 
     private val model by lazy {
         listOf(
-            box_one_text,
-            box_two_text,
-            box_three_text,
-            box_four_text,
-            box_five_text
+            boxOneText,
+            boxTwoText,
+            boxThreeText,
+            boxFourText,
+            boxFiveText
         )
     }
 
@@ -29,11 +28,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleOnClick(view: View) = when (view.id) {
-        R.id.box_one_text -> view.setBackgroundColor(Color.CYAN)
-        R.id.box_two_text -> view.setBackgroundColor(Color.MAGENTA)
-        R.id.box_three_text -> view.setBackgroundResource(android.R.color.holo_blue_bright)
-        R.id.box_four_text -> view.setBackgroundResource(android.R.color.holo_red_light)
-        R.id.box_five_text -> view.setBackgroundResource(android.R.color.background_dark)
+        R.id.boxOneText -> view.setBackgroundColor(Color.CYAN)
+        R.id.boxTwoText -> view.setBackgroundColor(Color.MAGENTA)
+        R.id.boxThreeText -> view.setBackgroundResource(android.R.color.holo_blue_bright)
+        R.id.boxFourText -> view.setBackgroundResource(android.R.color.holo_red_light)
+        R.id.boxFiveText -> view.setBackgroundResource(android.R.color.background_dark)
         else -> view.setBackgroundColor(Color.LTGRAY)
     }
 }

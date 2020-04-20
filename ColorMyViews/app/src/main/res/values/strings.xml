@@ -5,4 +5,6 @@
     <string name="box_three_text">Box tree</string>
     <string name="box_four_text">Box Four</string>
     <string name="box_five_text">Box Five</string>
+    <string name="howToPlay">How to play</string>
+    <string name="howToPlayDesc">Tap the screen and boxes to play</string>
 </resources>
