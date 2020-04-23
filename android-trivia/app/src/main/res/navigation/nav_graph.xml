@@ -54,7 +54,11 @@
         <action
             android:id="@+id/action_gameOverFragment2_to_gameFragment"
             app:destination="@id/gameFragment"
-            app:popUpTo="@id/titleFragment" />
+            app:popUpTo="@id/titleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
