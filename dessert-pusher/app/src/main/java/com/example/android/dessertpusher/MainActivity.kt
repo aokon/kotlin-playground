@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
+    private lateinit var dessertTimer: DessertTimer
 
     /** Dessert Data **/
 
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
     )
     private var currentDessert = allDesserts[0]
 
+    // one time init, layout inflations
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,6 +79,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
         Timber.i("onCreate called")
 
+        dessertTimer = DessertTimer()
+
         // Set the TextViews to the right values
         binding.revenue = revenue
         binding.amountSold = dessertsSold
@@ -85,34 +89,42 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding.dessertButton.setImageResource(currentDessert.imageId)
     }
 
+    // runs when activity is visible
     override fun onStart() {
         super.onStart()
         Timber.i("onStart called")
+        dessertTimer.startTimer()
     }
 
+    // run when activity loses focus + block UI from drawling -> keep this light-weight
     override fun onPause() {
         super.onPause()
         Timber.i("onPause called")
     }
 
+    // runs when activity gain focus
     override fun onResume() {
         super.onResume()
         Timber.i("onResume called")
     }
 
+    // final tear down
     override fun onDestroy() {
         super.onDestroy()
         Timber.i("onDestroy called")
     }
 
+    // runs only if app was already created
     override fun onRestart() {
         super.onRestart()
         Timber.i("onRestart called")
     }
 
+    // runs when activity is not visible
     override fun onStop() {
         super.onStop()
         Timber.i("onStop called")
+        dessertTimer.stopTimer()
     }
 
     /**
